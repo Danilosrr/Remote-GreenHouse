@@ -15,6 +15,7 @@ class SensorRouter {
   
     private initialize() {
       this.router.get(this.url, this.controller.getAll);
+      this.router.post(this.url, this.controller.receiveData);
     }
   }
   
