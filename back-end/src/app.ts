@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import handleErrors from "./Middlewares/errorHandler.js";
-import Routers from "./Routers/routers.js";
+import Routers from "./Routers/Routers.js";
 
 class App {
   private app: express.Application;

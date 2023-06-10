@@ -1,5 +1,6 @@
 import { Router } from "express";
-import SensorRouter from "./sensorRouter.js";
+import SensorRouter from "./SensorRouter.js";
+import DataRouter from "./DataRouter.js";
 
 class Routers {
   public router: Router;
@@ -13,6 +14,9 @@ class Routers {
   private initialize() {
     const sensorsRoute = new SensorRouter();
     this.router.use(sensorsRoute.router);
+
+    const dataRoute = new DataRouter();
+    this.router.use(dataRoute.router);
   }
 }
 
