@@ -17,6 +17,7 @@ model Sensors {
 
 model Data {
   id          Int      @id @default(autoincrement())
+  name        String
   temperature Float
   humidity    Float
   time        DateTime @default(now())

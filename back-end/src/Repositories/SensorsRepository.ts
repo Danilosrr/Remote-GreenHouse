@@ -4,6 +4,9 @@ class SensorRepository {
   public async createSensor(name: string) {
     return await prisma.sensors.create({ data: { name } });
   }
+  public async deleteSensor(name: string) {
+    return await prisma.sensors.delete({ where: { name } });
+  }
   public async findSensor(name: string) {
     return await prisma.sensors.findUnique({
       where: { name },
