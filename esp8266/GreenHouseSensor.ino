@@ -39,7 +39,7 @@ void connectSensor() {
   String identifierJson = "{\"name\":\"" + String(sensorName)+"\"}";
   int httpResponse = http.POST(identifierJson);
   if (httpResponse==409){Serial.println("Sensor já registrado!");}
-  else if (httpResponse==200){Serial.println("Novo sensor registrado!");}
+  else if (httpResponse==201){Serial.println("Novo sensor registrado!");}
   else { Serial.println("Falha ao registra sensor");};
 }
 
