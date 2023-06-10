@@ -2,6 +2,9 @@
 #include <ESP8266HTTPClient.h>
 #include <DHT.h>
 
+// Definir identificador do sensor
+const char* sensorName = "IDENTIFIER";
+
 // Definir as constantes de configuração do Wi-Fi
 const char* ssid = "SSID"; 
 const char* password = "PASSWORD";
@@ -26,17 +29,31 @@ void connectWifi() {
   Serial.println("Conexão Wi-Fi estabelecida!");
 }
 
-void sendData() {
+void connectSensor() {
   WiFiClient client;
   HTTPClient http;
 
   http.begin(client,"http://" + String(serverIP) + ":" + String(serverPort) + "/sensors");
   http.addHeader("Content-Type", "application/json");
+  
+  String identifierJson = "{\"name\":\"" + String(sensorName)+"\"}";
+  int httpResponse = http.POST(identifierJson);
+  if (httpResponse==409){Serial.println("Sensor já registrado!");}
+  else if (httpResponse==200){Serial.println("Novo sensor registrado!");}
+  else { Serial.println("Falha ao registra sensor");};
+}
+
+void sendData() {
+  WiFiClient client;
+  HTTPClient http;
+
+  http.begin(client,"http://" + String(serverIP) + ":" + String(serverPort) + "/data");
+  http.addHeader("Content-Type", "application/json");
 
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
   
-  String dataJson = "{\"temperature\":\"" + String(temperature) + "\",\"humidity\":\"" + String(humidity) + "\"}";
+  String dataJson = "{\"temperature\":\"" + String(temperature) + "\",\"humidity\":\"" + String(humidity) + "\",\"name\":\"" + String(sensorName) + "\"}";
   int httpResponse = http.POST(dataJson);
   
   if(httpResponse==200){
@@ -51,6 +68,7 @@ void sendData() {
 void setup() {
   Serial.begin(9600);
   connectWifi();
+  connectSensor();
   dht.begin();
 }
 
