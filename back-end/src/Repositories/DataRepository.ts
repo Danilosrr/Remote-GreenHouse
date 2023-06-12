@@ -12,11 +12,13 @@ class DataRepository {
     });
   }
   public async listSensorData(limit: number, name: string) {
-    return await prisma.data.findMany({
+    const list = await prisma.data.findMany({
       where: { name },
       select: { name: true, humidity: true, temperature: true, time: true },
+      orderBy: { id: "desc" },
       take: limit,
     });
+    return list.reverse();
   }
 }
 

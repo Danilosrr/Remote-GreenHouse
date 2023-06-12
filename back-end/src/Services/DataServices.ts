@@ -1,11 +1,14 @@
-import { data, reading, sensors } from "../Interfaces/SensorInterface.js";
+import { data, reading } from "../Interfaces/SensorInterface.js";
 import DataRepository from "../Repositories/DataRepository.js";
+import { io } from "../socket.js";
 
 class DataServices {
   private repository = new DataRepository();
 
   public async saveData(data: reading): Promise<reading | void> {
-    return await this.repository.createData(data);
+    const saveData = await this.repository.createData(data);
+    if (saveData) io.to(saveData.name).emit("newData", saveData);
+    return saveData;
   }
 
   public async getData(limit: number, filter?: string): Promise<data[]> {
