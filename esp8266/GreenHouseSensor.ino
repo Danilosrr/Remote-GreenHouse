@@ -2,23 +2,19 @@
 #include <ESP8266HTTPClient.h>
 #include <DHT.h>
 
-// Definir identificador do sensor
 const char* sensorName = "IDENTIFIER";
 
-// Definir as constantes de configuração do Wi-Fi
 const char* ssid = "SSID"; 
 const char* password = "PASSWORD";
 
-// Definir as constantes de configuração do servidor
 const char* serverIP = "SERVER_IP";
 const int serverPort = "PORT";
 
-// Definir o pino de dados do sensor DHT
 const int DHTPin = 14;
 DHT dht(DHTPin, DHT22);
 
 void connectWifi() {
-  Serial.print("Conectando-se à rede Wi-Fi...");
+  Serial.print("connecting to Wi-Fi...");
   WiFi.begin(ssid, password);
   
   while (WiFi.status() != WL_CONNECTED) {
@@ -26,7 +22,7 @@ void connectWifi() {
     Serial.print(".");
   }
   Serial.println("");
-  Serial.println("Conexão Wi-Fi estabelecida!");
+  Serial.println("Wi-Fi connection established!");
 }
 
 void connectSensor() {
@@ -38,9 +34,9 @@ void connectSensor() {
   
   String identifierJson = "{\"name\":\"" + String(sensorName)+"\"}";
   int httpResponse = http.POST(identifierJson);
-  if (httpResponse==409){Serial.println("Sensor já registrado!");}
-  else if (httpResponse==201){Serial.println("Novo sensor registrado!");}
-  else { Serial.println("Falha ao registra sensor");};
+  if (httpResponse==409){Serial.println("Sensor already registered!");}
+  else if (httpResponse==201){Serial.println("New sensor registered!");}
+  else { Serial.println("Error registering sensor");};
 }
 
 void sendData() {
@@ -57,7 +53,7 @@ void sendData() {
   int httpResponse = http.POST(dataJson);
   
   if(httpResponse==200){
-    Serial.print("Temperatura: " + String(temperature) + "°C\tUmidade: " + String(humidity) + "%");
+    Serial.print("Temperature: " + String(temperature) + "°C\thumidity: " + String(humidity) + "%");
   } else {
     Serial.print("Data not sent");
   }
@@ -78,5 +74,5 @@ void loop() {
   }
   
   sendData();
-  delay(10000);
+  delay(60000);//1min
 }
