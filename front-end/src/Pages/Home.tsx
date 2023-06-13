@@ -10,6 +10,7 @@ export default function Home() {
 
   async function loadChart() {
     await socketApi.selectSensor(selectedSensor, setData);
+    console.log("join",selectedSensor);
     socket.emit("join", selectedSensor);
   }
 

@@ -1,6 +1,7 @@
 import SensorsIcon from "@mui/icons-material/Sensors";
 import {
   Avatar,
+  Button,
   Dialog,
   DialogTitle,
   List,
@@ -8,6 +9,7 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { api, sensor } from "../Services/Api";
@@ -32,9 +34,12 @@ export default function ConfigButton({
 
   function changeSensor(newSensor: string) {
     const oldSensor = selectedSensor;
-    console.log(`leave ${oldSensor}`);
-    socket.emit("leave", { name: oldSensor });
-    setSelectedSensor(newSensor);
+    if (oldSensor != newSensor) {
+      console.log(`leave ${oldSensor}`);
+      socket.emit("leave", { name: oldSensor });
+      setSelectedSensor(newSensor);
+    }
+    setOpen(false);
   }
 
   useEffect(() => {
@@ -43,12 +48,20 @@ export default function ConfigButton({
 
   return (
     <>
-      <SensorsIcon
-        color="primary"
-        fontSize="large"
-        sx={{ margin: "0 5px" }}
+      <Button
+        endIcon={
+          <SensorsIcon
+            color="primary"
+            fontSize="large"
+            sx={{ margin: "0 5px" }}
+          />
+        }
         onClick={() => setOpen(true)}
-      ></SensorsIcon>
+      >
+        <Typography variant="body1">
+          {selectedSensor ? selectedSensor : "select sensor"}
+        </Typography>
+      </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Sensors</DialogTitle>
         <List>

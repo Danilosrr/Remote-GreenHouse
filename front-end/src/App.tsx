@@ -10,6 +10,11 @@ function App() {
       secondary: { main: "#00A2A2" },
       background: { default: "#F8F8F8", paper: "#FEFEFE" },
     },
+    typography: {
+      button: {
+        textTransform: "none",
+      },
+    },
   });
 
   return (
@@ -17,7 +22,7 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<Home/>} />
+          <Route path="" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
