@@ -26,4 +26,10 @@ io.on("connection", (socket) => {
   socket.on("newData", async (data) => {
     console.log("new sensor reading");
   });
+
+  socket.on("leave", async (data) => {
+    const { name }: { name: string } = data;
+    console.log("sensor disconnected");
+    socket.leave(name);
+  });
 });

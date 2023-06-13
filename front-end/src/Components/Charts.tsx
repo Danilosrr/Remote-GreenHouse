@@ -1,28 +1,13 @@
 import { Box } from "@mui/material";
 import TemperatureChart from "./TemperatureChart";
 import HumidityChart from "./HumidityChart";
-import { useEffect, useState } from "react";
-import socket from "../Config/Socket";
-import { data, socketApi } from "../Services/Socket";
+import { data } from "../Services/Socket";
 
-export default function Charts() {
-  const [data, setData] = useState<data[]>([]);
-  const sensorSelected = "Identifier"; //sensors selector to be implemented
+interface Props {
+  data: data[];
+}
 
-  useEffect(() => {
-    async function loadChart() {
-      await socketApi.selectSensor(sensorSelected, setData);
-      socket.emit("join", sensorSelected);
-    }
-    loadChart();
-  }, [sensorSelected]);
-
-  const addReading = (newReading: data) => {
-    console.log(newReading);
-    setData((data) => [...data, newReading]);
-  };
-  socketApi.useEventSubscription("newData", addReading);
-
+export default function Charts({ data }: Props) {
   return (
     <>
       <Box
