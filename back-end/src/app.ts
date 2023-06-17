@@ -1,6 +1,5 @@
 import "express-async-errors";
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 
 import handleErrors from "./Middlewares/errorHandler.js";
@@ -11,7 +10,6 @@ class App {
   private port: number;
 
   constructor(port: number) {
-    dotenv.config();
     this.port = port;
     this.app = express();
     this.middlewares();

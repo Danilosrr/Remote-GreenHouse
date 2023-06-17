@@ -16,6 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     loadChart();
+    // eslint-disable-next-line
   }, [selectedSensor]);
 
   const addReading = (newReading: data) => {

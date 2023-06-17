@@ -5,7 +5,7 @@ export type sensor = {
 };
 
 async function getSensors() {
-  const url = `http://localhost:4000/sensors`;
+  const url = `http://localhost:${process.env.REACT_APP_BACK}/sensors`;
   return await axios.get(url);
 }
 

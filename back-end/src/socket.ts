@@ -1,9 +1,12 @@
 import { Server } from "socket.io";
 import DataRepository from "./Repositories/DataRepository.js";
+import { configDotenv } from "dotenv";
+configDotenv({path:'../front-end/.env'})
 
 export const io = new Server({
   cors: {
-    origin: "*",
+    origin: `http://localhost:${process.env.PORT}`,
+    methods: ["GET", "POST"]
   },
 });
 

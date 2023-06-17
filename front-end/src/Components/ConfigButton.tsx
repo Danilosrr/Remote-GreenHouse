@@ -34,7 +34,7 @@ export default function ConfigButton({
 
   function changeSensor(newSensor: string) {
     const oldSensor = selectedSensor;
-    if (oldSensor != newSensor) {
+    if (oldSensor !== newSensor) {
       console.log(`leave ${oldSensor}`);
       socket.emit("leave", { name: oldSensor });
       setSelectedSensor(newSensor);
