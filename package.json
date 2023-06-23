@@ -1,0 +1,17 @@
+{
+  "name": "remote-greenhouse",
+  "version": "1.0.0",
+  "description": "### Overview This project aims to develop a localhost server that facilitates access to humidity and temperature data from a horticulture environment. The server is designed to connect with a locally hosted database, which is populated by an ESP8266 microcontroller. By providing a user-friendly interface, this solution enables users to conveniently monitor and analyze crucial environmental parameters for horticultural purposes.",
+  "main": "index.js",
+  "scripts": {
+    "back": "npm run dev --prefix back-end",
+    "front": "npm run start --prefix front-end",
+    "start": "concurrently \"npm run back\" \"npm run front\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
