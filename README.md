@@ -20,6 +20,41 @@ This project aims to develop a localhost server that facilitates access to humid
 - Data Visualization: Chart.js
 - Frontend: React.js, Typescript
 
-### Installation and Usage
-to be updated
+### Server Installation and Usage
+To install and use the application, please follow the steps below:
 
+1. Clone the repository to your local machine:
+   ```shell
+   git clone https://github.com/Danilosrr/Remote-GreenHouse
+   ```
+
+2. Configure environment variables:</br>
+Create a .env file in the front-end folder.
+Make sure to follow the required format specified in the .env.example file.
+   ```js
+    REACT_APP_BACK = 4000    //back-end port
+    PORT = 3000              //front-end port
+    SOCKET = 4001            //socket port
+    DATABASE_URL="postgresql://user:password@localhost:5432/database"
+    ```
+
+3. Run the application:</br>
+On the root folder.
+    ```shell
+    npm i
+    npm run deploy
+    ```
+
+4. Access the application by navigating to http://localhost:3000 in your web browser.
+
+### Sensor Installation
+
+1. Open the code from esp8266/GreenHouseSensor.ino in your IDE.
+
+2. Modify the following variables in the code to match your setup:
+    - `ssid`: Replace "SSID" with the name of your Wi-Fi network.
+    - `password`: Replace "PASSWORD" with the password for your Wi-Fi network.
+    - `serverIP`: Replace "SERVER_IP" with the IP address of your server.
+    - `serverPort`: Replace "PORT" with the port number used by your server.
+
+3. Once the code is successfully uploaded, the microcontroller must be fully functional.

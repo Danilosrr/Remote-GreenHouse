@@ -6,7 +6,10 @@
   "scripts": {
     "back": "npm run dev --prefix back-end",
     "front": "npm run start --prefix front-end",
-    "start": "concurrently \"npm run back\" \"npm run front\""
+    "deploy-back": "npm i --prefix back-end && npm run dev --prefix back-end",
+    "deploy-front": "npm i --prefix front-end && npm run start --prefix front-end",
+    "start": "concurrently \"npm run back\" \"npm run front\"",
+    "deploy": "concurrently \"npm run deploy-back\" \"npm run deploy-front\""
   },
   "keywords": [],
   "author": "",
